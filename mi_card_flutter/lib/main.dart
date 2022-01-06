@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Column(children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             CircleAvatar(
               radius: 50.0,
               backgroundColor: Colors.red,
@@ -35,57 +35,46 @@ class MyApp extends StatelessWidget {
                 color: Colors.teal.shade100,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(25.0),
-              child: Card(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      size: 25.0,
-                      color: Colors.teal,
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      '3 290 203030',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.teal[900],
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ],
+            SizedBox(
+              height: 20.0,
+              width: 150.0,
+              child: Divider(color: Colors.teal.shade100),
+            ),
+            Card(
+              color: Colors.white,
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                leading: Icon(
+                  Icons.phone,
+                  size: 25.0,
+                  color: Colors.teal,
+                ),
+                title: Text(
+                  '3 290 203030',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.teal[900],
+                    fontSize: 15.0,
+                  ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Card(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.email,
-                      size: 25.0,
-                      color: Colors.teal,
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      'monkey@genius.com',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.teal[900],
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ],
+            Card(
+              color: Colors.white,
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                leading: Icon(
+                  Icons.email,
+                  size: 25.0,
+                  color: Colors.teal,
+                ),
+                title: Text(
+                  'monkey@genius.com',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.teal[900],
+                    fontSize: 15.0,
+                  ),
                 ),
               ),
             ),
