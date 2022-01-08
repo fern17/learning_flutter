@@ -29,6 +29,18 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   QuizBrain quizBrain = QuizBrain();
 
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getQuestionAnswer();
+    setState(() {
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+      }
+      quizBrain.nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -65,16 +77,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked true.
-                bool answer = quizBrain.getQuestionAnswer();
-                if (answer == true) {
-                  scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-                } else {
-                  scoreKeeper.add(Icon(Icons.close, color: Colors.red));
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(true);
               },
             ),
           ),
@@ -92,16 +95,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked false.
-                bool answer = quizBrain.getQuestionAnswer();
-                if (answer == false) {
-                  scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-                } else {
-                  scoreKeeper.add(Icon(Icons.close, color: Colors.red));
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(false);
               },
             ),
           ),
