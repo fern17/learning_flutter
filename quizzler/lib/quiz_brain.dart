@@ -32,7 +32,7 @@ class QuizBrain {
         true),
   ];
   String getQuestionText() {
-    return _questionBank[_questionNumber].text;
+    return _questionBank[_questionNumber].questionText;
   }
 
   bool getQuestionAnswer() {
@@ -40,8 +40,16 @@ class QuizBrain {
   }
 
   void nextQuestion() {
-    if (_questionNumber < _questionBank.length - 1) {
+    if (!isFinished()) {
       _questionNumber++;
     }
+  }
+
+  bool isFinished() {
+    return _questionNumber == _questionBank.length;
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 }

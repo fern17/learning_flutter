@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(Quizzler());
 
@@ -38,6 +39,16 @@ class _QuizPageState extends State<QuizPage> {
         scoreKeeper.add(Icon(Icons.close, color: Colors.red));
       }
       quizBrain.nextQuestion();
+      if (quizBrain.isFinished()) {
+        Alert(
+                context: context,
+                title: "End of Quiz",
+                desc:
+                    "You arrived at the end of the Quiz. It is going to be restarted")
+            .show();
+        quizBrain.reset();
+        scoreKeeper.clear();
+      }
     });
   }
 
