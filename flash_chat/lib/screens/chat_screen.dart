@@ -108,6 +108,8 @@ class MessagesStream extends StatelessWidget {
             ),
           );
         }
+        // ToDo: Note: The messages are not ordered by date!
+        // Maybe we should add a timestamp property to each message and create a query to order by time (orderBy, sort)
         final messages = snapshot.data.docs;
         List<MessageBubble> messageWidgets = [];
         for (var message in messages) {
