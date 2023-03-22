@@ -1,15 +1,15 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 
 class CircleImage extends StatelessWidget {
-  final double imageRadius;
-  final ImageProvider? imageProvider;
-
-  CircleImage({
+  const CircleImage({
+    super.key,
     this.imageProvider,
     this.imageRadius = 20,
   });
+
+  final double imageRadius;
+  final ImageProvider? imageProvider;
+
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
