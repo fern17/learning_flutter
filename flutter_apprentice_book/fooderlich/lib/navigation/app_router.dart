@@ -15,12 +15,33 @@ class AppRouter {
       initialLocation: '/login',
       routes: [
         GoRoute(
-            name: 'home',
-            path: '/:tab',
-            builder: (context, state) {
-              final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
-              return Home(key: state.pageKey, currentTab: tab);
-            }),
+          name: 'home',
+          path: '/:tab',
+          builder: (context, state) {
+            final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+            return Home(key: state.pageKey, currentTab: tab);
+          },
+          routes: [
+            GoRoute(
+              name: 'item',
+              path: 'item/:id',
+              builder: (context, state) {
+                final itemId = state.params['id'] ?? '';
+                final item = groceryManager.getGroceryItem(itemId);
+                return GroceryItemScreen(
+                  originalItem: item,
+                  onCreate: (item) {
+                    groceryManager.addItem(item);
+                  },
+                  onUpdate: (item) {
+                    groceryManager.updateItem(item);
+                  },
+                );
+              },
+            ),
+            // TODO: profile subroute
+          ],
+        ),
         GoRoute(
           name: 'login',
           path: '/login',
@@ -50,14 +71,16 @@ class AppRouter {
         if (!loggedIn) {
           return loggingIn ? null : '/login';
         }
-
+        /*
+        commented for now because it doesn't work...
         final isOnBoardingComplete = appStateManager.isOnboardingComplete;
         final onboarding = state.subloc == '/onboarding';
         if (!isOnBoardingComplete) {
           return onboarding ? null : '/onboarding';
         }
+        */
 
-        if (loggingIn || onboarding) return '/${FooderlichTab.explore}';
+        if (loggingIn || false) return '/${FooderlichTab.explore}';
         return null;
       });
 }
