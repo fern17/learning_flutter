@@ -15,6 +15,13 @@ class AppRouter {
       initialLocation: '/login',
       routes: [
         GoRoute(
+            name: 'home',
+            path: '/:tab',
+            builder: (context, state) {
+              final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+              return Home(key: state.pageKey, currentTab: tab);
+            }),
+        GoRoute(
           name: 'login',
           path: '/login',
           builder: (context, state) => const LoginScreen(),
