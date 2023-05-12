@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+
+import '../components/components.dart';
 import '../models/models.dart';
-import 'components.dart';
 
 class FriendPostListView extends StatelessWidget {
-  const FriendPostListView({super.key, required this.friendPosts});
   final List<Post> friendPosts;
+
+  const FriendPostListView({
+    super.key,
+    required this.friendPosts,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,10 @@ class FriendPostListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Social Chefs', style: Theme.of(context).textTheme.headline1),
+          Text(
+            'Social Chefs 👩‍🍳',
+            style: Theme.of(context).textTheme.headline1,
+          ),
           const SizedBox(height: 16),
           ListView.separated(
             primary: false,
