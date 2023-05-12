@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../models/models.dart';
 
 class RecipeThumbnail extends StatelessWidget {
   final SimpleRecipe recipe;
-  const RecipeThumbnail({super.key, required this.recipe});
+
+  const RecipeThumbnail({
+    super.key,
+    required this.recipe,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class RecipeThumbnail extends StatelessWidget {
           ),
           Text(
             recipe.duration,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ],
       ),

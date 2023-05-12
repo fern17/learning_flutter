@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
 import '../models/grocery_item.dart';
 
 class GroceryTile extends StatelessWidget {
@@ -18,13 +19,16 @@ class GroceryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.0,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Container(width: 5.0, color: item.color),
+              Container(
+                width: 5.0,
+                color: item.color,
+              ),
               const SizedBox(width: 16.0),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,10 +56,10 @@ class GroceryTile extends StatelessWidget {
                 item.quantity.toString(),
                 style: GoogleFonts.lato(
                   decoration: textDecoration,
-                  fontSize: 21.0,
+                  fontSize: 21,
                 ),
               ),
-              buildCheckbox(),
+              buildCheckbox()
             ],
           ),
         ],
@@ -66,22 +70,18 @@ class GroceryTile extends StatelessWidget {
   Widget buildImportance() {
     if (item.importance == Importance.low) {
       return Text(
-        'low',
-        style: GoogleFonts.lato(
-          decoration: textDecoration,
-        ),
+        'Low',
+        style: GoogleFonts.lato(decoration: textDecoration),
       );
     } else if (item.importance == Importance.medium) {
       return Text(
-        'medium',
+        'Medium',
         style: GoogleFonts.lato(
-          fontWeight: FontWeight.w800,
-          decoration: textDecoration,
-        ),
+            fontWeight: FontWeight.w800, decoration: textDecoration),
       );
     } else if (item.importance == Importance.high) {
       return Text(
-        'high',
+        'High',
         style: GoogleFonts.lato(
           color: Colors.red,
           fontWeight: FontWeight.w900,
@@ -89,7 +89,7 @@ class GroceryTile extends StatelessWidget {
         ),
       );
     } else {
-      throw Exception('This importance type does not exist!');
+      throw Exception('This importance type does not exist');
     }
   }
 
@@ -98,9 +98,7 @@ class GroceryTile extends StatelessWidget {
     final dateString = dateFormatter.format(item.date);
     return Text(
       dateString,
-      style: TextStyle(
-        decoration: textDecoration,
-      ),
+      style: TextStyle(decoration: textDecoration),
     );
   }
 
