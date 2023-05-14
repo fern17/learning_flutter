@@ -105,40 +105,60 @@ class _RecipeListState extends State<RecipeList> {
         child: Row(
           children: [
             // Replace
-            const Icon(Icons.search),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                startSearch(searchTextController.text);
+                final currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+              },
+            ),
             const SizedBox(
               width: 6.0,
             ),
-            // *** Start Replace
             Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: 'Search'),
-                      autofocus: false,
-                      controller: searchTextController,
-                      onChanged: (query) => {
-                        if (query.length >= 3)
-                          {
-                            // Rebuild list
-                            setState(
-                              () {
-                                currentSearchList.clear();
-                                currentCount = 0;
-                                currentEndPosition = pageCount;
-                                currentStartPosition = 0;
-                              },
-                            )
-                          }
-                      },
-                    ),
+              child: Row(children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    decoration: const InputDecoration(
+                        border: InputBorder.none, hintText: 'Search'),
+                    autofocus: false,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (value) {
+                      startSearch(searchTextController.text);
+                    },
+                    controller: searchTextController,
                   ),
-                ],
-              ),
+                ),
+                PopupMenuButton<String>(
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: lightGrey,
+                  ),
+                  onSelected: (String value) {
+                    searchTextController.text = value;
+                    startSearch(searchTextController.text);
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return previousSearches
+                        .map<CustomDropdownMenuItem<String>>((String value) {
+                      return CustomDropdownMenuItem(
+                          value: value,
+                          text: value,
+                          callback: () {
+                            setState(() {
+                              previousSearches.remove(value);
+                              savePreviousSearches();
+                              Navigator.pop(context);
+                            });
+                          });
+                    }).toList();
+                  },
+                ),
+              ]),
             ),
-            // *** End Replace
           ],
         ),
       ),
