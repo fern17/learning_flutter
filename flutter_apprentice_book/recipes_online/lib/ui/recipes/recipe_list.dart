@@ -8,6 +8,7 @@ import '../colors.dart';
 import '../../network/recipe_model.dart';
 import '../recipe_card.dart';
 import 'recipe_details.dart';
+import '../../network/recipe_service.dart';
 
 class RecipeList extends StatefulWidget {
   const RecipeList({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
   late TextEditingController searchTextController;
   final ScrollController _scrollController = ScrollController();
-  List currentSearchList = [];
+  List<APIHits> currentSearchList = [];
   int currentCount = 0;
   int currentStartPosition = 0;
   int currentEndPosition = 20;
@@ -56,6 +57,12 @@ class _RecipeListState extends State<RecipeList> {
         }
       }
     });
+  }
+
+  Future<APIRecipeQuery> getRecipeData(String query, int from, int to) async {
+    final recipeJson = await RecipeService().getRecipes(query, from, to);
+    final recipeMap = json.decode(recipeJson);
+    return APIRecipeQuery.fromJson(recipeMap);
   }
 
   Future loadRecipes() async {
@@ -189,6 +196,25 @@ class _RecipeListState extends State<RecipeList> {
     });
   }
 
+  Widget _buildRecipeList(BuildContext recipeListContext, List<APIHits> hits) {
+    final size = MediaQuery.of(context).size; // device size
+    const itemHeight = 310;
+    final itemWidth = size.width / 2;
+    return Flexible(
+      child: GridView.builder(
+        controller: _scrollController,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: (itemWidth / itemHeight),
+        ),
+        itemCount: hits.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildRecipeCard(recipeListContext, hits, index);
+        },
+      ),
+    );
+  }
+
   // TODO: Replace method
   Widget _buildRecipeLoader(BuildContext context) {
     if (_currentRecipes1 == null || _currentRecipes1?.hits == null) {
@@ -216,7 +242,7 @@ class _RecipeListState extends State<RecipeList> {
           }),
         );
       },
-      child: recipeStringCard(recipe.image, recipe.label),
+      child: recipeCard(recipe),
     );
   }
 }
