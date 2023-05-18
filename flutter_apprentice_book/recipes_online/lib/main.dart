@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'dart:developer';
+import 'package:logging/logging.dart';
 import 'ui/main_screen.dart';
 
 Future<void> main() async {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    _setupLogging();
     return MaterialApp(
       title: 'Recipes',
       debugShowCheckedModeBanner: false,
@@ -24,5 +26,12 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainScreen(),
     );
+  }
+
+  void _setupLogging() {
+    Logger.root.level = Level.ALL;
+    Logger.root.onRecord.listen((rec) {
+      log('${rec.level.name}: ${rec.time}: ${rec.message}');
+    });
   }
 }

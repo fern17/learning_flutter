@@ -2,8 +2,9 @@ import 'package:chopper/chopper.dart';
 import 'recipe_model.dart';
 import 'model_response.dart';
 import 'model_converter.dart';
-
-part 'recipe_service.chopper.dart'; // generated when running: flutter pub run build_runner build --delete-conflicting-outputs
+// generated when running:
+// flutter pub run build_runner build --delete-conflicting-outputs
+part 'recipe_service.chopper.dart';
 
 const String apiKey = '1da8792156917892a46004afd0cc4757';
 const String apiId = '168901c7';
