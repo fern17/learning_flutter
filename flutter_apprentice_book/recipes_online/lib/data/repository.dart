@@ -11,7 +11,7 @@ abstract class Repository {
 
   void deleteRecipe(Recipe recipe);
   void deleteIngredient(Ingredient ingredient);
-  void deleteIngredients(List<Ingredient> ingredient);
+  void deleteIngredients(List<Ingredient> ingredients);
   void deleteRecipeIngredients(int recipeId);
 
   Future init();
