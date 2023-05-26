@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../data/models/models.dart';
 // generated file when calling `flutter pub run build_runner build`
 part 'recipe_model.g.dart';
 
@@ -88,4 +89,17 @@ class APIIngredients {
   factory APIIngredients.fromJson(Map<String, dynamic> json) =>
       _$APIIngredientsFromJson(json);
   Map<String, dynamic> toJson() => _$APIIngredientsToJson(this);
+}
+
+List<Ingredient> convertIngredients(List<APIIngredients> apiIngredients) {
+  final ingredients = <Ingredient>[];
+  for (final ingredient in apiIngredients) {
+    ingredients.add(
+      Ingredient(
+        name: ingredient.name,
+        weight: ingredient.weight,
+      ),
+    );
+  }
+  return ingredients;
 }
