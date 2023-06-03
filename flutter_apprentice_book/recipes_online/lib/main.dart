@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 import 'ui/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'data/memory_repository.dart';
+import 'mock_service/mock_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,12 +14,19 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MemoryRepository>(
-      lazy: false,
-      create: (_) => MemoryRepository(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MemoryRepository>(
+          lazy: false,
+          create: (_) => MemoryRepository(),
+        ),
+        Provider(
+          create: (_) => MockService()..create(),
+          lazy: false,
+        ),
+      ],
       child: MaterialApp(
         title: 'Recipes',
         debugShowCheckedModeBanner: false,

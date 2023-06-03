@@ -24,7 +24,6 @@ class _ShoppingListState extends State<ShoppingList> {
               return CheckboxListTile(
                 value:
                     checkBoxValues.containsKey(index) && checkBoxValues[index]!,
-                // TODO 3
                 title: Text(ingredients[index].name ?? ''),
                 onChanged: (newValue) {
                   if (newValue != null) {

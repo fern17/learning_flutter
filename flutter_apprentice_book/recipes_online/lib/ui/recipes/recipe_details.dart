@@ -29,24 +29,22 @@ class RecipeDetails extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: [
-                    // Align(
-                    //   alignment: Alignment.topLeft,
-                    //   // TODO 1
-                    //   child: Image.asset(
-                    //     'assets/images/pizza_w700.png',
-                    //     height: 200,
-                    //     width: 200,
-                    //   ),
-                    // ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: CachedNetworkImage(
-                        imageUrl: recipe.image ?? '',
-                        alignment: Alignment.topLeft,
-                        fit: BoxFit.fill,
-                        width: size.width,
+                      child: Image.asset(
+                        'assets/images/pizza_w700.png',
+                        height: 200,
+                        width: 200,
                       ),
                     ),
+                    //Align(
+                    //  alignment: Alignment.topLeft,
+                    //  child: CachedNetworkImage(
+                    //    imageUrl: recipe.image ?? '',
+                    //    alignment: Alignment.topLeft,
+                    //    fit: BoxFit.fill,
+                    //    width: size.width,
+                    //  ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
