@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 import '../../data/models/recipe.dart';
 import '../../data/memory_repository.dart';
+import '../../globals.dart' as globals;
 
 class MyRecipesList extends StatefulWidget {
   const MyRecipesList({Key? key}) : super(key: key);
@@ -75,16 +76,18 @@ class _MyRecipesListState extends State<MyRecipesList> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                           leading: Image.asset(
-                             'assets/images/pizza_w700.png',
-                             height: 200,
-                             width: 200,
-                          //leading: CachedNetworkImage(
-                          //  imageUrl: recipe.image ?? '',
-                          //  height: 120,
-                          //  width: 60,
-                          //  fit: BoxFit.cover,
-                          ),
+                          leading: globals.useMockService
+                              ? Image.asset(
+                                  'assets/images/pizza_w700.png',
+                                  height: 200,
+                                  width: 200,
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl: recipe.image ?? '',
+                                  height: 120,
+                                  width: 60,
+                                  fit: BoxFit.cover,
+                                ),
                           title: Text(recipe.label ?? ''),
                         ),
                       ),

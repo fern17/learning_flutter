@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../network/recipe_model.dart';
 import '../../data/models/models.dart';
 import '../../data/memory_repository.dart';
-
 import '../colors.dart';
+import '../../globals.dart' as globals;
 
 class RecipeDetails extends StatelessWidget {
   final Recipe recipe;
@@ -29,22 +29,24 @@ class RecipeDetails extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Image.asset(
-                        'assets/images/pizza_w700.png',
-                        height: 200,
-                        width: 200,
-                      ),
-                    ),
-                    //Align(
-                    //  alignment: Alignment.topLeft,
-                    //  child: CachedNetworkImage(
-                    //    imageUrl: recipe.image ?? '',
-                    //    alignment: Alignment.topLeft,
-                    //    fit: BoxFit.fill,
-                    //    width: size.width,
-                    //  ),
+                    globals.useMockService
+                        ? Align(
+                            alignment: Alignment.topLeft,
+                            child: Image.asset(
+                              'assets/images/pizza_w700.png',
+                              height: 200,
+                              width: 200,
+                            ),
+                          )
+                        : Align(
+                            alignment: Alignment.topLeft,
+                            child: CachedNetworkImage(
+                              imageUrl: recipe.image ?? '',
+                              alignment: Alignment.topLeft,
+                              fit: BoxFit.fill,
+                              width: size.width,
+                            ),
+                          ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
@@ -61,7 +63,7 @@ class RecipeDetails extends StatelessWidget {
                   height: 16,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 16.0),
+                  padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
                     recipe.label ?? '',
                     style: const TextStyle(
@@ -74,7 +76,7 @@ class RecipeDetails extends StatelessWidget {
                   height: 16,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 16.0),
+                  padding: const EdgeInsets.only(left: 16.0),
                   child: Chip(
                     label: Text(
                       getCalories(recipe.calories),
