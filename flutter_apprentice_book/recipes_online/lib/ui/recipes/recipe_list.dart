@@ -12,9 +12,8 @@ import '../../network/recipe_model.dart';
 import '../../network/model_response.dart';
 import '../../network/recipe_service.dart';
 import '../../data/models/models.dart';
-import '../../mock_service/mock_service.dart';
+import '../../network/service_interface.dart';
 import 'package:provider/provider.dart';
-import '../../globals.dart' as globals;
 
 class RecipeList extends StatefulWidget {
   const RecipeList({Key? key}) : super(key: key);
@@ -212,17 +211,11 @@ class _RecipeListState extends State<RecipeList> {
     }
 
     return FutureBuilder<Response<Result<APIRecipeQuery>>>(
-        future: globals.useMockService
-            ? Provider.of<MockService>(context).queryRecipes(
-                searchTextController.text.trim(),
-                currentStartPosition,
-                currentEndPosition,
-              )
-            : RecipeService.create().queryRecipes(
-                searchTextController.text.trim(),
-                currentStartPosition,
-                currentEndPosition,
-              ),
+        future: Provider.of<ServiceInterface>(context).queryRecipes(
+          searchTextController.text.trim(),
+          currentStartPosition,
+          currentEndPosition,
+        ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {

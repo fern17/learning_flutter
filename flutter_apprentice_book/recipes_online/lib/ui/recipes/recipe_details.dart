@@ -4,9 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 import '../../network/recipe_model.dart';
 import '../../data/models/models.dart';
-import '../../data/memory_repository.dart';
+import '../../data/repository.dart';
 import '../colors.dart';
-import '../../globals.dart' as globals;
 
 class RecipeDetails extends StatelessWidget {
   final Recipe recipe;
@@ -17,7 +16,7 @@ class RecipeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repository = Provider.of<MemoryRepository>(context);
+    final repository = Provider.of<Repository>(context);
     final size = MediaQuery.of(context).size; // screen size
     return Scaffold(
       body: SafeArea(
@@ -29,24 +28,15 @@ class RecipeDetails extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: [
-                    globals.useMockService
-                        ? Align(
-                            alignment: Alignment.topLeft,
-                            child: Image.asset(
-                              'assets/images/pizza_w700.png',
-                              height: 200,
-                              width: 200,
-                            ),
-                          )
-                        : Align(
-                            alignment: Alignment.topLeft,
-                            child: CachedNetworkImage(
-                              imageUrl: recipe.image ?? '',
-                              alignment: Alignment.topLeft,
-                              fit: BoxFit.fill,
-                              width: size.width,
-                            ),
-                          ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: CachedNetworkImage(
+                        imageUrl: recipe.image ?? '',
+                        alignment: Alignment.topLeft,
+                        fit: BoxFit.fill,
+                        width: size.width,
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
