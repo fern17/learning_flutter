@@ -16,7 +16,10 @@ Widget recipeCard(APIRecipe recipe) {
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(6.0), topRight: Radius.circular(6.0)),
           child: CachedNetworkImage(
-              imageUrl: recipe.image, height: 210, fit: BoxFit.fill),
+            imageUrl: recipe.image,
+            height: 210,
+            fit: BoxFit.fill,
+          ),
         ),
         const SizedBox(
           height: 12.0,
@@ -34,7 +37,7 @@ Widget recipeCard(APIRecipe recipe) {
           height: 8.0,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             getCalories(recipe.calories),
             style: const TextStyle(
