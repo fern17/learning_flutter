@@ -79,4 +79,22 @@ CREATE TABLE $ingredientTable (
     await database;
     return _streamDatabase;
   }
+
+  List<Recipe> parseRecipes(List<Map<String, dynamic>> recipeList) {
+    final recipes = <Recipe>[];
+    for (final recipeMap in recipeList) {
+      final recipe = Recipe.fromJson(recipeMap);
+      recipes.add(recipe);
+    }
+    return recipes;
+  }
+
+  List<Ingredient> parseIngredients(List<Map<String, dynamic>> ingredientList) {
+    final ingredients = <Ingredient>[];
+    for (final ingredientMap in ingredientList) {
+      final ingredient = Ingredient.fromJson(ingredientMap);
+      ingredients.add(ingredient);
+    }
+    return ingredients;
+  }
 }
