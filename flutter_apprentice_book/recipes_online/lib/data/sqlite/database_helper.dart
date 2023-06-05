@@ -140,4 +140,28 @@ CREATE TABLE $ingredientTable (
     final ingredients = parseIngredients(ingredientList);
     return ingredients;
   }
+
+  Future<int> insert(String table, Map<String, dynamic> row) async {
+    final db = await instance.streamDatabase;
+    return db.insert(
+      table,
+      row,
+    );
+  }
+
+  Future<int> insertRecipe(Recipe recipe) {
+    return insert(
+      recipeTable,
+      recipe.toJson(),
+    );
+  }
+
+  Future<int> insertIngredient(Ingredient ingredient) {
+    return insert(
+      ingredientTable,
+      ingredient.toJson(),
+    );
+  }
+
+  
 }
