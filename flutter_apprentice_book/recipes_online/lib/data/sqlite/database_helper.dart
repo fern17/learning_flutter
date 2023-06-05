@@ -97,4 +97,47 @@ CREATE TABLE $ingredientTable (
     }
     return ingredients;
   }
+
+  Future<List<Recipe>> findAllRecipes() async {
+    final db = await instance.streamDatabase;
+    final recipeList = await db.query(recipeTable);
+    final recipes = parseRecipes(recipeList);
+    return recipes;
+  }
+
+  Stream<List<Recipe>> watchAllRecipes() async* {
+    final db = await instance.streamDatabase;
+    yield* db.createQuery(recipeTable).mapToList((row) => Recipe.fromJson(row));
+  }
+
+  Stream<List<Ingredient>> watchAllIngredients() async* {
+    final db = await instance.streamDatabase;
+    yield* db
+        .createQuery(ingredientTable)
+        .mapToList((row) => Ingredient.fromJson(row));
+  }
+
+  Future<Recipe> findRecipeById(int id) async {
+    final db = await instance.streamDatabase;
+    final recipeList = await db.query(recipeTable, where: 'id = $id');
+    final recipes = parseRecipes(recipeList);
+    return recipes.first;
+  }
+
+  Future<List<Ingredient>> findAllIngredients() async {
+    final db = await instance.streamDatabase;
+    final ingredientList = await db.query(ingredientTable);
+    final ingredients = parseIngredients(ingredientList);
+    return ingredients;
+  }
+
+  Future<List<Ingredient>> findRecipeIngredients(int recipeId) async {
+    final db = await instance.streamDatabase;
+    final ingredientList = await db.query(
+      ingredientTable,
+      where: 'recipeId = $recipeId',
+    );
+    final ingredients = parseIngredients(ingredientList);
+    return ingredients;
+  }
 }
