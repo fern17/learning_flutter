@@ -8,9 +8,13 @@ import 'data/repository.dart';
 import 'data/sqlite/sqlite_repository.dart';
 import 'network/recipe_service.dart';
 import 'network/service_interface.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  sqfliteFfiInit();
+
+  databaseFactory = databaseFactoryFfi;
   final repository = SqliteRepository();
   await repository.init();
   runApp(MyApp(repository: repository));

@@ -55,7 +55,7 @@ CREATE TABLE $ingredientTable (
     );
 
     // TODO: remember to turn off debugging before deploying app to store(s)
-    Sqflite.setDebugModeOn(true);
+    //Sqflite.setDebugModeOn(true);
 
     return openDatabase(
       path,
