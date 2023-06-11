@@ -126,11 +126,15 @@ class DriftRepository extends Repository {
 
   @override
   Future<void> deleteIngredient(Ingredient ingredient) {
+    /*
+    // commented because of build errors
     if (ingredient.id != null) {
       return _ingredientDao.deleteIngredient(ingredient.id!);
     } else {
       Future.value();
     }
+    */
+    return _ingredientDao.deleteIngredient(ingredient.id!);
   }
 
   @override

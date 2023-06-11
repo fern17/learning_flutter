@@ -3,9 +3,8 @@ import 'dart:developer';
 import 'package:logging/logging.dart';
 import 'ui/main_screen.dart';
 import 'package:provider/provider.dart';
-import 'data/memory_repository.dart';
+import 'data/drift/drift_repository.dart';
 import 'data/repository.dart';
-import 'data/sqlite/sqlite_repository.dart';
 import 'network/recipe_service.dart';
 import 'network/service_interface.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -15,7 +14,7 @@ Future<void> main() async {
   sqfliteFfiInit();
 
   databaseFactory = databaseFactoryFfi;
-  final repository = SqliteRepository();
+  final repository = DriftRepository();
   await repository.init();
   runApp(MyApp(repository: repository));
 }
